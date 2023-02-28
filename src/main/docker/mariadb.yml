@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  mapstruct-mariadb:
+    build:
+      context: ./mariaDb
+      dockerfile: Dockerfile
+    #    volumes:
+    #      - ~/volumes/jhipster/StarBackend/mysql/:/var/lib/mysql/
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      MYSQL_MULTIPLE_DATABASES: |-
+        mapstruct_demo mapstruct_demo_test
+
+    ports:
+      - 53306:3306
+
+    restart: always
+    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
